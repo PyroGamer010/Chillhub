@@ -6,51 +6,68 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
     // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
 model User {
-    username String     @id
-    email    String     @unique
-    UserPage UserPage[]
-    // AdminPages  Admins[]
-    // BannedPages Banned[]
-    Premium  Boolean    @default(false)
-    // UserPage UserPage[]
+    Username               String      @id
+    Email                  String      @unique
+    UserPage               UserPage?   @relation("owner")
+    Premium                Boolean     @default(false)
+    UserPageId             String
+    AdminPermisionStreams  UserPage[]  @relation("Admins")
+    BannedPermisionStreams UserPage[]  @relation("Banned")
+    Following              Following[]
 }
 
 model UserPage {
-    id           String @id
-    User         User   @relation(fields: [id], references: [username])
-    followers    Int
+    id           String      @id
+    Owner        User        @relation("owner", fields: [id], references: [Username])
     Viewers      Int
     AllTimeViews Int
-    // Genre        Genres
-    title        String
-    // Admins       Admins[]
-    // Banned       Banned[]
+    Genre        Genres
+    Title        String
+    Admins       User[]      @relation("Admins")
+    Banned       User[]      @relation("Banned")
+    Followers    Following[]
+
+    @@index([id])
 }
 
-// model Banned {
-//     id       String   @id
-//     UserPage UserPage @relation(fields: [id], references: [id])
-//     User     User     @relation(fields: [username], references: [username])
-//     username String
-// }
+enum Genres {
+    POP
+    ROCK
+}
 
-// model Admins {
-//     id       String   @id
-//     UserPage UserPage @relation(fields: [id], references: [id])
-//     User     User     @relation(fields: [username], references: [username])
-//     username String
-// }
+model Following {
+    id             String        @id
+    User           User          @relation(fields: [id], references: [Username])
+    Following      UserPage      @relation(fields: [userPageId], references: [id])
+    userPageId     String
+    Subscription   subscription? @relation(fields: [subscriptionId], references: [id])
+    TierStart      DateTime?
+    subscriptionId String?
 
-// enum Genres {
-//     POP
-//     ROCK
-// }
+    @@index([id])
+    @@index([userPageId])
+    @@index([subscriptionId])
+}
+
+model subscription {
+    id        String      @id
+    Tier      Tier
+    StartTime DateTime
+    Following Following[]
+}
+
+enum Tier {
+    TIER1
+    TIER2
+    TIER3
+}
