@@ -7,7 +7,7 @@ const Page: NextPage = () => {
       <Head>
         <title>Login</title>
         <meta name="description" content="Login site" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/chillhub.png" />
       </Head>
       <main>
         <div className={styles.container}>kaas</div>
