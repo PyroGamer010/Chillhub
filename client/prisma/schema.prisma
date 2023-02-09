@@ -6,61 +6,68 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
     // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
-}
-
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
-
-// Necessary for Next auth
-model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? // @db.Text
-    access_token      String? // @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? // @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-    @@unique([provider, providerAccountId])
-}
-
-model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+    Username               String      @id
+    Email                  String      @unique
+    UserPage               UserPage?   @relation("owner")
+    Premium                Boolean     @default(false)
+    UserPageId             String
+    AdminPermisionStreams  UserPage[]  @relation("Admins")
+    BannedPermisionStreams UserPage[]  @relation("Banned")
+    Following              Following[]
 }
 
-model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+model UserPage {
+    id           String      @id
+    Owner        User        @relation("owner", fields: [id], references: [Username])
+    Viewers      Int
+    AllTimeViews Int
+    Genre        Genres
+    Title        String
+    Admins       User[]      @relation("Admins")
+    Banned       User[]      @relation("Banned")
+    Followers    Following[]
 
-    @@unique([identifier, token])
+    @@index([id])
+}
+
+enum Genres {
+    POP
+    ROCK
+}
+
+model Following {
+    id             String        @id
+    User           User          @relation(fields: [id], references: [Username])
+    Following      UserPage      @relation(fields: [userPageId], references: [id])
+    userPageId     String
+    Subscription   subscription? @relation(fields: [subscriptionId], references: [id])
+    TierStart      DateTime?
+    subscriptionId String?
+
+    @@index([id])
+    @@index([userPageId])
+    @@index([subscriptionId])
+}
+
+model subscription {
+    id        String      @id
+    Tier      Tier
+    StartTime DateTime
+    Following Following[]
+}
+
+enum Tier {
+    TIER1
+    TIER2
+    TIER3
 }
