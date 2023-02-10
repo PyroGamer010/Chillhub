@@ -6,12 +6,13 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider     = "sqlite"
     // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
 // Necessary for Next auth
@@ -31,6 +32,7 @@ model Account {
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@index([userId])
 }
 
 model Session {
@@ -39,6 +41,8 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
 }
 
 model User {
@@ -49,6 +53,10 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    description   String?
+    MyStreams     Stream[]
+    Viewing       Viewer[]  @relation("following")
+    Viewers       Viewer[]  @relation("followers")
 }
 
 model VerificationToken {
@@ -57,4 +65,54 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Viewer {
+    id          String           @id @default(cuid())
+    Viewer      User             @relation("following", fields: [viewerID], references: [id], onDelete: Cascade)
+    viewerID    String
+    Viewing     User             @relation("followers", fields: [viewingID], references: [id], onDelete: Cascade)
+    viewingID   String
+    isFollowing Boolean
+    isBanned    Boolean
+    isTimedOut  Viewer_TimeOuts?
+
+    @@index([viewerID])
+    @@index([viewingID])
+}
+
+model Viewer_TimeOuts {
+    id     String   @id @default(cuid())
+    Viewer Viewer   @relation(fields: [id], references: [id], onDelete: Cascade)
+    Until  DateTime
+
+    @@index([id])
+}
+
+model Stream {
+    id     String        @id @default(cuid())
+    User   User          @relation(fields: [userId], references: [id])
+    userId String
+    name   String
+    image  Bytes
+    tags   Stream_Tags[]
+
+    @@index([userId])
+}
+
+model Stream_Tags {
+    id     String  @id @default(cuid())
+    Stream Stream  @relation(fields: [id], references: [id], onDelete: Cascade)
+    Tags   Tags?   @relation(fields: [tagId], references: [id], onDelete: Cascade)
+    tagId  String?
+
+    @@index([id])
+    @@index([tagId])
+}
+
+model Tags {
+    id           String        @id @default(cuid())
+    tag          String
+    used_streams Stream_Tags[]
+    isBanned     Boolean
 }
