@@ -82,6 +82,14 @@
       flex-direction: row;
       color: white;
 
+      button {
+        margin-left: 10px;
+      }
+
+      button:hover {
+        color: cyan;
+      }
+
       .box {
         width: 180px;
       }
@@ -98,6 +106,10 @@
       background-color: #101010;
       color: white;
       margin: 15px;
+    }
+
+    .manage:hover {
+      color: cyan;
     }
   }
 }

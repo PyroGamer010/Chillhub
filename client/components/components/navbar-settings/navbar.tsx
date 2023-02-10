@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { FiSearch } from "react-icons/fi";
 import { BsFillPersonFill } from "react-icons/bs";
+import { IoSettingsSharp } from "react-icons/io5";
 
 import { signIn, signOut, useSession } from "next-auth/react";
 
@@ -13,32 +14,22 @@ const Component = () => {
   return (
     <nav className={styles.Nav}>
       <div className={styles.left}>
-        <img src="/chillhub.png" alt="jpg" />
+        <IoSettingsSharp />
+        <div> settings</div>
+        <Link href="/">Home</Link>
       </div>
       
       <div className={styles.center}>
-        <div className={styles.above}>
           <div className={styles.search}>
             <input type="text" />
             <button><FiSearch /></button>
           </div>
-        </div>
-      
-        <div className={styles.below}>
-          <div className={styles.favorieten}> 
-            <Link href="#">Add more favorites</Link>
-          </div>
-        </div>
       </div>
       
       <div className={styles.right}>
         <div className={styles.profile}>
           <div className={styles.box}>Logged in as: {session?.user?.name}</div>
           <BsFillPersonFill />
-          <button onClick={() => signOut()}>Log out</button>
-        </div>
-        <div className={styles.manage}>
-          <Link href="/settings">Manage account</Link>
         </div>
       </div>
     </nav>
