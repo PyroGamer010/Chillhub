@@ -1,0 +1,13 @@
+{
+  "name": "chillhub",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "clean": "rm -rf node_modules && rm -rf client/node_modules",
+    "install": "pnpm clean && pnpm install && cd client && pnpm install",
+    "dev": "cd client && pnpm dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
