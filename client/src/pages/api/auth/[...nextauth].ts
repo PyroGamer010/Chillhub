@@ -45,6 +45,10 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+  pages: {
+    verifyRequest: "../../authpages/verify-request",
+    // newUser: "/new-user",
+  }
 };
 
 export default NextAuth(authOptions);

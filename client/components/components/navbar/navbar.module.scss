@@ -1,0 +1,103 @@
+.Nav {
+  background-color: #1B1B1B;
+  width: 100vw;
+  height: 150px;
+  display: flex;
+  align-items: center;
+
+  .left {
+
+    img {
+      height: 153px;
+      width: 280px;
+      margin-left: 100px;
+    }
+  }
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+
+    .above {
+
+      .search {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+
+        input {
+          width: 500px;
+          height: 30px;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+          border: none;
+          padding-left: 10px;
+          font-size: 1.1rem;
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 30px;
+          background-color: #101010;
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+        }
+      }
+    }
+
+    .below {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+
+      .favorieten {
+        font-size: 1.2rem;
+        color: white;
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    margin-top: 10px;
+    padding-right: 20px;
+    
+    .profile {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      color: white;
+
+      .box {
+        width: 180px;
+      }
+    }
+
+    .manage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 40px;
+      border-radius: 5px;
+      box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.3), 0 3px 10px 0 rgba(0, 0, 0, 0.3);
+      background-color: #101010;
+      color: white;
+      margin: 15px;
+    }
+  }
+}

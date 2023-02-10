@@ -2,6 +2,8 @@ import styles from "./index.module.scss";
 
 import { signIn, signOut, useSession } from "next-auth/react";
 
+import Navbar from "../../components/navbar/navbar";
+
 const Index = () => {
     const { data: session, status } = useSession();
 
@@ -10,7 +12,8 @@ const Index = () => {
     return (
         <>
             <main>
-                <h1>Welkom {session?.user?.name}</h1>
+                <Navbar />
+                
                 <button onClick={() => signOut()}>Log out</button><br />
             </main>
         </>
