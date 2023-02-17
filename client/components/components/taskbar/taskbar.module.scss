@@ -12,9 +12,14 @@
         .pinned {
             display: flex;
             flex-direction: column;
-            margin-top: 30px;
+            margin-top: 10px;
             margin-left: 10px;
             width: calc(100% - 10px);
+
+            p {
+                color: white;
+                font-size: 1rem;
+            }
 
             .pinnedItem {
                 display: flex;
@@ -50,6 +55,34 @@
                         color: white;
                         margin-right: 5px;
                     }
+                }
+            }
+        }
+
+        .boxMiddle {
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+            align-items: center;
+            margin-bottom: 30px;
+
+            .boxCenter {
+
+
+                .boxItem {
+                    display: flex;
+                    color: white;
+                    font-size: 1.5rem;
+                    align-items: center;
+                    margin: 5px;
+    
+                    .link {
+                        margin-left: 10px;
+                    }
+                }
+
+                .boxItem:hover {
+                    color: cyan;
                 }
             }
         }
