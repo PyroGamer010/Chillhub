@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
 import styles from "./navbar.module.scss";
 import Link from "next/link";
@@ -33,9 +34,14 @@ const Component = () => {
       
       <div className={styles.right}>
         <div className={styles.profile}>
-          <div className={styles.box}>Logged in as: {session?.user?.name}</div>
-          <BsFillPersonFill />
-          <button onClick={() => signOut()}>Log out</button>
+          <div className={styles.box}>
+            Logged in as: {session?.user?.name}
+            <div className={styles.content}>
+              <button onClick={() => {
+                void signOut()}}
+                >Log out</button>
+            </div>
+          </div>
         </div>
         <div className={styles.manage}>
           <Link href="/settings">Manage account</Link>
