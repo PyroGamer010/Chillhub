@@ -88,3 +88,9 @@
         }
     }
 }
+
+@media (max-width: 1250px) {
+    .taskbar {
+        height: calc(100vh - 75px);
+    }
+}

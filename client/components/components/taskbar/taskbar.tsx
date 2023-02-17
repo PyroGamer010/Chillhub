@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import styles from './taskbar.module.scss'
 
 import { BsFillPersonFill } from 'react-icons/bs'
