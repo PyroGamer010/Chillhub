@@ -30,7 +30,7 @@ const Taskbar = () => {
                             <div className={styles.viewer}>
                                 <BsFillPersonFill />
                                 <div>
-                                    999
+                                    264
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@ const Taskbar = () => {
                             <div className={styles.viewer}>
                                 <BsFillPersonFill />
                                 <div>
-                                    999
+                                    87
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@ const Taskbar = () => {
                             <div className={styles.viewer}>
                                 <BsFillPersonFill />
                                 <div>
-                                    999
+                                    1328
                                 </div>
                             </div>
                         </div>
