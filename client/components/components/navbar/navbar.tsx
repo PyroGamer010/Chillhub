@@ -35,7 +35,7 @@ const Component = () => {
       <div className={styles.right}>
         <div className={styles.profile}>
           <div className={styles.box}>
-            Logged in as: {session?.user?.name}
+            Logged in as: {session?.user?.image != undefined && (<img src={session?.user?.image} alt="jpg/png" />)}  {session?.user?.name}
             <div className={styles.content}>
               <button onClick={() => {
                 void signOut()}}

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import styles from './taskbar.module.scss'
 
@@ -20,7 +21,7 @@ const Taskbar = () => {
                     <div className={styles.pinned}>
                         <p>Pinned</p>                   
                         <div className={styles.pinnedItem}>
-                            <BsFillPersonFill />
+                            {session?.user?.image != undefined && (<img src={session?.user?.image} alt="jpg/png" />)}
                             <div className={styles.text}>
                                 {session?.user?.name} 
                                 <div>
@@ -36,7 +37,7 @@ const Taskbar = () => {
                         </div>
 
                         <div className={styles.pinnedItem}>
-                            <BsFillPersonFill />
+                            {session?.user?.image != undefined && (<img src={session?.user?.image} alt="jpg/png" />)}
                             <div className={styles.text}>
                                 {session?.user?.name} 
                                 <div>
@@ -52,7 +53,7 @@ const Taskbar = () => {
                         </div>
 
                         <div className={styles.pinnedItem}>
-                            <BsFillPersonFill />
+                            {session?.user?.image != undefined && (<img src={session?.user?.image} alt="jpg/png" />)}
                             <div className={styles.text}>
                                 {session?.user?.name} 
                                 <div>
@@ -95,7 +96,7 @@ const Taskbar = () => {
                     <div className={styles.pinned}>
                         <p>Recommended</p>                        
                         <div className={styles.pinnedItem}>
-                            <BsFillPersonFill />
+                            {session?.user?.image != undefined && (<img src={session?.user?.image} alt="jpg/png" />)}
                             <div className={styles.text}>
                                 {session?.user?.name} 
                                 <div>
@@ -111,7 +112,7 @@ const Taskbar = () => {
                         </div>
 
                         <div className={styles.pinnedItem}>
-                            <BsFillPersonFill />
+                            {session?.user?.image != undefined && (<img src={session?.user?.image} alt="jpg/png" />)}
                             <div className={styles.text}>
                                 {session?.user?.name} 
                                 <div>
@@ -127,7 +128,7 @@ const Taskbar = () => {
                         </div>
 
                         <div className={styles.pinnedItem}>
-                            <BsFillPersonFill />
+                            {session?.user?.image != undefined && (<img src={session?.user?.image} alt="jpg/png" />)}
                             <div className={styles.text}>
                                 {session?.user?.name} 
                                 <div>

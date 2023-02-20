@@ -5,6 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 import Navbar from "../../components/navbar/navbar";
 import Taskbar from "../../components/taskbar/taskbar";
+import Main from "../../components/main/main"; 
 
 const Index = () => {
     const { data: session, status } = useSession();
@@ -15,7 +16,10 @@ const Index = () => {
         <>
             <main>
                 <Navbar />
-                <Taskbar />
+                <div className={styles.taskMain}>
+                    <Taskbar />
+                    <Main />
+                </div>
             </main>
         </>
     );

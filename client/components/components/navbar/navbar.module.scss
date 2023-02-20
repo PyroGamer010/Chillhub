@@ -85,6 +85,15 @@
       .box {
         min-width: 250px;
         display: flex;
+        align-items: center;
+
+        img {
+          width: 40px;
+          height: auto;
+          border-radius: 50%;
+          margin-left: 5px;
+          margin-right: 5px;
+        }
 
         .content {
           button {

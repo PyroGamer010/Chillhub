@@ -90,14 +90,17 @@ model Viewer_TimeOuts {
 }
 
 model Stream {
-    id     String        @id @default(cuid())
-    User   User          @relation(fields: [userId], references: [id])
-    userId String
-    name   String
-    image  Bytes
-    tags   Stream_Tags[]
+    id      String        @id @default(cuid())
+    User    User          @relation(fields: [userId], references: [id])
+    userId  String
+    name    String
+    image   Bytes
+    tags    Stream_Tags[]
+    Genre   Genre?        @relation(fields: [genreId], references: [id])
+    genreId String?
 
     @@index([userId])
+    @@index([genreId])
 }
 
 model Stream_Tags {
@@ -115,4 +118,10 @@ model Tags {
     tag          String
     used_streams Stream_Tags[]
     isBanned     Boolean
+}
+
+model Genre {
+    id           String   @id @default(cuid())
+    genre        String
+    used_streams Stream[]
 }
